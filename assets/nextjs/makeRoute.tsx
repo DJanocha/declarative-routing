@@ -48,6 +48,7 @@ type CoreRouteElements<
   paramsSchema: Params;
   search: z.output<Search>;
   searchSchema: Search;
+  urlBuilder: (p?: z.input<Params>, search?: z.input<Search>) => string;
 };
 
 type PutRouteBuilder<
@@ -273,6 +274,7 @@ export function makePostRoute<
   routeBuilder.bodySchema = postInfo.body;
   routeBuilder.result = undefined as z.output<Result>;
   routeBuilder.resultSchema = postInfo.result;
+  routeBuilder.urlBuilder = urlBuilder;
 
   return routeBuilder;
 }
@@ -336,6 +338,7 @@ export function makePutRoute<
   routeBuilder.bodySchema = putInfo.body;
   routeBuilder.result = undefined as z.output<Result>;
   routeBuilder.resultSchema = putInfo.result;
+  routeBuilder.urlBuilder = urlBuilder;
 
   return routeBuilder;
 }
@@ -380,6 +383,7 @@ export function makeGetRoute<
   routeBuilder.searchSchema = info.search;
   routeBuilder.result = undefined as z.output<Result>;
   routeBuilder.resultSchema = getInfo.result;
+  routeBuilder.urlBuilder = urlBuilder;
 
   return routeBuilder;
 }
@@ -416,6 +420,7 @@ export function makeDeleteRoute<
   routeBuilder.paramsSchema = info.params;
   routeBuilder.search = undefined as z.output<Search>;
   routeBuilder.searchSchema = info.search;
+  routeBuilder.urlBuilder = urlBuilder;
 
   return routeBuilder;
 }
@@ -477,6 +482,7 @@ export function makeRoute<
   urlBuilder.paramsSchema = info.params;
   urlBuilder.search = undefined as z.output<Search>;
   urlBuilder.searchSchema = info.search;
+  urlBuilder.urlBuilder = urlBuilder;
 
   return urlBuilder;
 }
