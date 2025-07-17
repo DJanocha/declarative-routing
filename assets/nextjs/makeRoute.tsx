@@ -209,7 +209,11 @@ function createRouteBuilder<
 
     const baseUrl = fn(checkedParams);
     const searchString = search && queryString.stringify(search);
-    return ["/", baseUrl, searchString ? `?${searchString}` : ""].join("");
+    return [
+      baseUrl.startsWith("/") ? "" : "/",
+      baseUrl,
+      searchString ? `?${searchString}` : ""
+    ].join("");
   };
 }
 
